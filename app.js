@@ -9,3 +9,29 @@ marqueeToggle?.addEventListener('click',()=>{
   marqueeToggle.setAttribute('aria-pressed',String(paused));
   marqueeToggle.setAttribute('aria-label',paused?'Retomar faixa':'Pausar faixa');
 });
+
+const heroVideo = document.querySelector('.hero-cinematic .hero-video');
+const heroMotionButton = document.querySelector('.hero-cinematic .hero-motion');
+const heroMotionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+
+function updateHeroMotionControl() {
+  heroMotionButton.textContent = heroVideo.paused ? 'Reproduzir vídeo' : 'Pausar vídeo';
+}
+
+function applyHeroMotionPreference() {
+  heroVideo.autoplay = !heroMotionPreference.matches;
+  if (heroMotionPreference.matches) heroVideo.pause();
+}
+
+heroVideo.addEventListener('playing', () => {
+  heroMotionButton.hidden = false;
+  updateHeroMotionControl();
+});
+heroVideo.addEventListener('pause', updateHeroMotionControl);
+heroMotionButton.addEventListener('click', () => {
+  if (heroVideo.paused) heroVideo.play().catch(updateHeroMotionControl);
+  else heroVideo.pause();
+});
+heroMotionPreference.addEventListener('change', applyHeroMotionPreference);
+applyHeroMotionPreference();
+if (!heroVideo.paused) heroMotionButton.hidden = false;

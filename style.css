@@ -84,3 +84,74 @@
 .pricing-unlimited{border-color:#a68a32;background:linear-gradient(145deg,#272215,#111);box-shadow:0 10px 45px #d4af3709}
 @media(max-width:1000px) and (min-width:801px){.pricing-card{padding:26px 18px}.pricing-card .button{font-size:11px;gap:8px}}
 @media(max-width:800px){.pricing-grid{grid-template-columns:1fr;max-width:480px;margin:32px auto 0}.pricing-card{padding:30px}.pricing-card .pricing-price{font-size:38px}.pricing-section{padding-top:70px;padding-bottom:50px}}
+
+.hero.hero-cinematic {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: max(34rem, 100svh);
+  padding: 4.5rem 1.25rem;
+  overflow: hidden;
+  text-align: center;
+  background: #0a0a0a url("assets/capa-treino.jpg") center / cover no-repeat;
+}
+.hero-cinematic .hero-video, .hero-cinematic .hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.hero-cinematic .hero-video { object-fit: cover; z-index: -2; }
+.hero-cinematic .hero-overlay {
+  z-index: -1;
+  background: linear-gradient(180deg, #0009, #000d);
+}
+.hero-cinematic .hero-content { width: min(100%, 52rem); }
+.hero-cinematic .hero-badge {
+  display: inline-block;
+  padding: .4rem .85rem;
+  border: 1px solid #d4af3770;
+  border-radius: 2rem;
+  background: #161306b8;
+  color: var(--gold);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+.hero-cinematic h1 {
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  margin: 1rem 0;
+}
+.hero-cinematic .hero-content p {
+  max-width: 39rem;
+  margin: 0 auto 1.75rem;
+  color: #ededed;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.hero-cinematic .hero-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
+.hero-cinematic .hero-buttons .button { font-size: .95rem; }
+.hero-cinematic .hero-secondary {
+  background: #08080866;
+  border: 1px solid #ffffff70;
+  color: #fff;
+}
+.hero-cinematic .hero-motion {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: .4rem .7rem;
+  border: 1px solid #ffffff60;
+  border-radius: .4rem;
+  background: #0a0a0acc;
+  color: #fff;
+  font-size: .8rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cinematic .hero-video, .hero-cinematic .hero-motion { display: none; }
+}
