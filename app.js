@@ -35,3 +35,41 @@ heroMotionButton.addEventListener('click', () => {
 heroMotionPreference.addEventListener('change', applyHeroMotionPreference);
 applyHeroMotionPreference();
 if (!heroVideo.paused) heroMotionButton.hidden = false;
+
+const treinoSection = document.querySelector('#treinos');
+const treinoMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+treinoSection?.querySelectorAll('.treino-card').forEach((card) => {
+  const video = card.querySelector('.card-video');
+  const button = card.querySelector('.card-play');
+  if (!video.querySelector('source[src]')) return;
+
+  button.hidden = false;
+  treinoSection.querySelector('.modalidades-instructions').hidden = false;
+  const title = card.querySelector('h3').textContent;
+  const play = () => video.play().catch(() => {});
+
+  video.addEventListener('play', () => {
+    button.setAttribute('aria-pressed', 'true');
+    button.setAttribute('aria-label', 'Pausar ' + title);
+    button.textContent = 'Ⅱ';
+  });
+  video.addEventListener('pause', () => {
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-label', 'Reproduzir ' + title);
+    button.textContent = '▶';
+  });
+
+  card.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'mouse' && !treinoMotion.matches) play();
+  });
+  card.addEventListener('pointerleave', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    video.pause();
+    if (video.readyState > 0) video.currentTime = 0;
+  });
+  button.addEventListener('click', () => {
+    if (video.paused) play();
+    else video.pause();
+  });
+});

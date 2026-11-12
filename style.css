@@ -155,3 +155,37 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-cinematic .hero-video, .hero-cinematic .hero-motion { display: none; }
 }
+
+.modalidades-section { background: #0d0d0d; padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.modalidades-header { max-width: 42rem; margin: 0 auto 2.5rem; text-align: center; }
+.modalidades-header .section-tag { color: var(--gold); font-size: .8rem; font-weight: 700; letter-spacing: .15em; }
+.modalidades-header h2 { text-transform: uppercase; }
+.modalidades-header p { color: var(--muted); }
+.modalidades-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.modalidades-section .treino-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: end;
+  min-height: 27.5rem;
+  overflow: hidden;
+  border: 1px solid #ffffff24;
+  border-radius: 1rem;
+  background: #161616;
+  transition: border-color .3s, transform .3s;
+}
+.modalidades-section .card-video, .modalidades-section .card-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
+.modalidades-section .card-video { object-fit: cover; z-index: -2; }
+.modalidades-section .card-overlay { z-index: -1; background: linear-gradient(0deg,#000f 0%,#000c 32%,#0002 80%); }
+.modalidades-section .card-info { padding: clamp(1rem, 3vw, 1.75rem); }
+.modalidades-section .card-info h3 { margin: .7rem 0 .35rem; font-size: clamp(1.15rem, 2.5vw, 1.5rem); }
+.modalidades-section .card-info p { color: #e0e0e0; margin: 0; }
+.modalidades-section .card-badge { display: inline-block; padding: .25rem .6rem; border-radius: .25rem; color: #0b0b0b; background: var(--gold); font-weight: 700; font-size: .7rem; }
+.modalidades-section .card-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 1rem; border: 0; background: transparent; color: var(--gold); text-align: right; align-content: start; font-size: 1.25rem; }
+.modalidades-section .card-play:focus-visible { outline-offset: -5px; }
+.modalidades-section .treino-card:focus-within { border-color: var(--gold); }
+@media (hover: hover) and (pointer: fine) {
+  .modalidades-section .treino-card:has(.card-play:not([hidden])):hover { border-color: var(--gold); transform: translateY(-4px); }
+}
+@media (max-width: 850px) { .modalidades-grid { grid-template-columns: 1fr; max-width: 34rem; margin-inline: auto; } }
+@media (prefers-reduced-motion: reduce) { .modalidades-section .treino-card { transform: none !important; transition: none; } }
